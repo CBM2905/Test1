@@ -17,7 +17,7 @@ export class TerremotosService {
   }
    
   getTerremotosPorFecha(startTime: string, endTime: string): Observable<Terremoto>{
-    return this.http.get<Terremoto>(`${environment.baseUrl}/query?format=geojson&starttime=${startTime}&endtime=${endTime}`); 
+    return this.http.get<Terremoto>(`${environment.baseUrl}/query?format=geojson&starttime=${startTime}&endtime=${endTime}&limit=80`); 
   }
   
   getTerremotosPorMagnitud(minMagnitude: number): Observable<Terremoto> {

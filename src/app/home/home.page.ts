@@ -69,27 +69,34 @@ export class HomePage {
   async searchByFechaIF(){
     let alert = this.alertController.create({
       header: "buscar terremotos por fecha",
-      message: "ingrese las fechas [inicio] y [fin]",
+      message: "ingrese las fechas en año-mes-dia",
       inputs: [
         {
           name: "fechaI",
           label: "fecha Inicio",
-          type: 'text'
+          type: 'text',
+          placeholder: "2025-2-2"
         },
         {
           name: "fechaF",
           label: "fecha fin",
-          type: "text"
+          type: "text",
+          placeholder: "2025-3-4"
         }
       ],
       buttons: [
         {
           text: "buscar",
-          handler: (data) => {
-            
+          handler: async (data) => {
+            const loading = await this.loadingCtlr.create({
+              message: 'Cargando...',
+              spinner: 'bubbles'
+            });
+            await loading.present();
             this.terremotos.splice(0, this.terremotos.length);
             this.terremotoService.getTerremotosPorFecha(data.fechaI, data.fechaF).subscribe(
               (dataAPI) => {
+                loading.dismiss();
                 this.terremotos.push(...dataAPI.features);
               }
             )
