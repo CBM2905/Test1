@@ -18,5 +18,8 @@ export class TerremotosService {
     return this.http.get<Terremoto>(`${environment.baseUrl}/query?format=geojson&starttime=${startTime}&endtime=${endTime}`); 
   }
   
+  getTerremotosPorMagnitud(minMagnitude: number): Observable<Terremoto> {
+    return this.http.get<Terremoto>(`${environment.baseUrl}/query?format=geojson&orderby=time&minmagnitude=${minMagnitude}`);
+  }
 }
 
