@@ -1,8 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Terremitoszdas
-      Blank
+      Sismos
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -21,6 +20,7 @@
           <h2>
             {{ terremoto.properties.place }}
           </h2>
+          <p>Magnitud: {{ terremoto.properties.mag }}</p>
         </ion-label>
     </ion-item>
     }
@@ -39,8 +39,11 @@
       <ion-fab-button>
         <ion-icon name="color-palette" (click)="searchByFechaIF()"></ion-icon>
       </ion-fab-button>
-      <ion-fab-button>
-        <ion-icon name="globe"></ion-icon>
+      <ion-fab-button (click)="filtrarPorMagnitud()">
+        <ion-icon name="analytics-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button (click)="filtrarPorCiudad()">
+        <ion-icon name="globe-outline"></ion-icon>
       </ion-fab-button>
     </ion-fab-list>
   </ion-fab>
