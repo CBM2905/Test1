@@ -11,6 +11,19 @@ import { TerremotosService } from '../servicios/terremotos.service';
 export class HomePage {
   terremotos: any[] = [];
 
+  ciudades = [
+    { nombre: "Tokio", lat: 35.6895, lon: 139.6917 },
+    { nombre: "Los Ángeles", lat: 34.0522, lon: -118.2437 },
+    { nombre: "Ciudad de México", lat: 19.4326, lon: -99.1332 },
+    { nombre: "Santiago", lat: -33.4489, lon: -70.6693 },
+    { nombre: "Estambul", lat: 41.0082, lon: 28.9784 },
+    { nombre: "Teherán", lat: 35.6892, lon: 51.3890 },
+    { nombre: "Manila", lat: 14.5995, lon: 120.9842 },
+    { nombre: "Jakarta", lat: -6.2088, lon: 106.8456 },
+    { nombre: "San Francisco", lat: 37.7749, lon: -122.4194 },
+    { nombre: "Atenas", lat: 37.9838, lon: 23.7275 }
+  ];
+
   constructor(
     private loadingCtlr: LoadingController,
     private terremotoService: TerremotosService,
@@ -19,7 +32,7 @@ export class HomePage {
     this.loadTerromotos();
   }
 
-  async loadTerromotos(event?: InfiniteScrollCustomEvent, minMagnitude?: number) {
+  async loadTerromotos(event?: InfiniteScrollCustomEvent, minMagnitude?: number, lat?: number, lon?: number) {
     const loading = await this.loadingCtlr.create({
       message: 'Cargando...',
       spinner: 'bubbles'
@@ -27,7 +40,9 @@ export class HomePage {
     await loading.present();
 
     let observable;
-    if (minMagnitude) {
+    if (lat !== undefined && lon !== undefined) {
+      observable = this.terremotoService.getTerremotosPorCiudad(lat, lon);
+    } else if (minMagnitude) {
       observable = this.terremotoService.getTerremotosPorMagnitud(minMagnitude);
     } else {
       observable = this.terremotoService.getUltimosTerremotos();
@@ -47,7 +62,7 @@ export class HomePage {
 
   async filtrarPorMagnitud() {
     const alert = await this.alertController.create({
-      header: 'Filtrar Sismos',
+      header: 'Filtrar Sismos por Magnitud',
       inputs: [
         {
           name: 'magnitud',
@@ -71,5 +86,32 @@ export class HomePage {
 
     await alert.present();
   }
-}
 
+  async filtrarPorCiudad() {
+    const alert = await this.alertController.create({
+      header: 'Selecciona una Ciudad',
+      inputs: this.ciudades.map((ciudad) => ({
+        name: 'ciudad',
+        type: 'radio',
+        label: ciudad.nombre,
+        value: ciudad
+      })),
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel'
+        },
+        {
+          text: 'Buscar',
+          handler: (ciudadSeleccionada) => {
+            if (ciudadSeleccionada) {
+              this.loadTerromotos(undefined, undefined, ciudadSeleccionada.lat, ciudadSeleccionada.lon);
+            }
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+}
