@@ -11,11 +11,11 @@ export class TerremotosService {
   constructor(private http: HttpClient) { }
 
   getUltimosTerremotos(): Observable<Terremoto>{
-    return this.http.get<Terremoto>(`${environment.baseUrl}/query?format=geojson&orderby=time&limit=5`)
+    return this.http.get<Terremoto>(`${environment.baseUrl}/query?format=geojson&orderby=time&limit=5`);
   }
    
   getTerremotosPorFecha(startTime: string, endTime: string): Observable<Terremoto>{
-    return this.http.get<Terremoto>(`${environment.baseUrl}/query?format=geojson&starttime=${startTime}&endtime=${endTime}`)
+    return this.http.get<Terremoto>(`${environment.baseUrl}/query?format=geojson&starttime=${startTime}&endtime=${endTime}`); 
   }
   
 }
