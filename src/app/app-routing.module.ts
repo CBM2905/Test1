@@ -12,7 +12,7 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'home/:id',
+    path: 'home/:id/:data',
     loadChildren: () => import('./terremoto/terremoto.module').then( m => m.TerremotoPageModule)
   },
 ];

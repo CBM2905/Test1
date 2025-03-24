@@ -23,5 +23,5 @@ export class TerremotoPage implements OnInit {
     }).addTo(map);
 
   }
-
+  
 }
