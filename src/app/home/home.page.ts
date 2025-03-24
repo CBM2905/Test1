@@ -154,4 +154,8 @@ export class HomePage {
 
     await alert.present();
   }
+  convertirFecha(time: number): string {
+    const fecha = new Date(time);
+    return fecha.toLocaleString(); // Convierte a fecha legible según la configuración del sistema
+  }
 }

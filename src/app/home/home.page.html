@@ -21,6 +21,7 @@
             {{ terremoto.properties.place }}
           </h2>
           <p>Magnitud: {{ terremoto.properties.mag }}</p>
+          <p>Hora: {{ convertirFecha(terremoto.properties.time) }}</p>
         </ion-label>
     </ion-item>
     }
