@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { TerremotoPageRoutingModule } from './terremoto-routing.module';
-
+import { LeafletModule } from '@bluehalo/ngx-leaflet';
 import { TerremotoPage } from './terremoto.page';
 
 @NgModule({
@@ -13,7 +13,8 @@ import { TerremotoPage } from './terremoto.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    TerremotoPageRoutingModule
+    TerremotoPageRoutingModule,
+    LeafletModule    
   ],
   declarations: [TerremotoPage]
 })

@@ -15,7 +15,7 @@
 
   <ion-list>
     @for (terremoto of terremotos; track terremoto; let index = $index){
-    <ion-item [button]="true" [routerLink]="[terremoto.properties.place, terremoto.properties.code]">
+    <ion-item [button]="true" [routerLink]="[terremoto.geometry.coordinates[0], terremoto.geometry.coordinates[1], terremoto.properties.mag, terremoto.properties.detail]">
         <ion-label>
           <h2>
             {{ terremoto.properties.place }}

@@ -12,7 +12,7 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'home/:id/:data',
+    path: 'home/:latitud/:longitud/:magnitud/:detalles',
     loadChildren: () => import('./terremoto/terremoto.module').then( m => m.TerremotoPageModule)
   },
 ];

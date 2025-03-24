@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import * as L from 'leaflet'
 @Component({
   selector: 'app-terremoto',
@@ -6,18 +7,28 @@ import * as L from 'leaflet'
   styleUrls: ['./terremoto.page.scss'],
   standalone: false
 })
-export class TerremotoPage implements OnInit {
+export class TerremotoPage {
+  constructor(private route: ActivatedRoute) { }
 
-  constructor() { }
-
-  ngOnInit() {  
-    this.initMap();
+  ionViewDidEnter() {
+    const lat = this.route.snapshot.paramMap.get("latitud");
+    const lon = this.route.snapshot.paramMap.get("longitud");
+    const mag = this.route.snapshot.paramMap.get("magnitud");
+    const details = this.route.snapshot.paramMap.get("detalles");
+    this.initMap(lat, lon, mag, details);
   }
 
 
-  private initMap(): void {
-    const map = L.map('map').setView([51.505, -0.09], 13);
-
+  private initMap(lat: any, lon: any, mag: any, details: any): void {
+   
+    const map = L.map('map').setView( [lon, lat], 13);
+    map.on("load", function(){
+      setTimeout(() => {
+        map.invalidateSize();
+      }, 10)
+    })
+    var marker = L.marker([lon, lat]).addTo(map) // "Kyiv" is the accessible name of this marker
+      .bindPopup("Aqui fue el lugar del terremoto con una magnitud de:" + mag + "mas info + " + details);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
