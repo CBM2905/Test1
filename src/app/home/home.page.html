@@ -15,7 +15,7 @@
 
   <ion-list>
     @for (terremoto of terremotos; track terremoto; let index = $index){
-    <ion-item [button]="true">
+    <ion-item [button]="true" [routerLink]="terremoto.properties.place">
         <ion-label>
           <h2>
             {{ terremoto.properties.place }}
@@ -27,7 +27,22 @@
   <ion-infinite-scroll (ionInfinite)="loadMore($event)">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>
-
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button>
+      <ion-icon name="chevron-up-circle"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button (click)="loadTerromotos()">
+        <ion-icon name="document"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button>
+        <ion-icon name="color-palette"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button>
+        <ion-icon name="globe"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
 
 
   

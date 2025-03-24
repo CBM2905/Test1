@@ -11,6 +11,10 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'home/:id',
+    loadChildren: () => import('./terremoto/terremoto.module').then( m => m.TerremotoPageModule)
+  },
 ];
 
 @NgModule({
