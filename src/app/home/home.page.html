@@ -1,8 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Terremitoszdas
-      Blank
+      Sismos
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -21,6 +20,7 @@
           <h2>
             {{ terremoto.properties.place }}
           </h2>
+          <p>Magnitud: {{ terremoto.properties.mag }}</p>
         </ion-label>
     </ion-item>
     }
