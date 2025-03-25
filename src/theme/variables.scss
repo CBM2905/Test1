@@ -1,21 +1,84 @@
-// For information on how to create your own theme, please see:
-// http://ionicframework.com/docs/theming/
 
-
+// Colores
 :root {
-	--ion-color-prueba: #2ccde2;
-	--ion-color-prueba-rgb: 44,205,226;
-	--ion-color-prueba-contrast: #000000;
-	--ion-color-prueba-contrast-rgb: 0,0,0;
-	--ion-color-prueba-shade: #27b4c7;
-	--ion-color-prueba-tint: #41d2e5;
+    --colorprimarioligth: aqua;
+    --colorprimariodark: #cf1010;
+
+    --mi-color-secundario: #e34a6f;
+    --mi-color-texto: #333333;
+}
+  
+// Tipografías
+:root {
+    --mi-fuente-titulos: 'Arial', sans-serif;
+    --mi-fuente-texto: 'Open Sans', sans-serif;
+}
+  
+// Sombras y efectos
+:root {
+    --mi-sombra: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --mi-transicion: all 0.3s ease-in-out;
 }
 
-.ion-color-prueba {
-	--ion-color-base: var(--ion-color-prueba);
-	--ion-color-base-rgb: var(--ion-color-prueba-rgb);
-	--ion-color-contrast: var(--ion-color-prueba-contrast);
-	--ion-color-contrast-rgb: var(--ion-color-prueba-contrast-rgb);
-	--ion-color-shade: var(--ion-color-prueba-shade);
-	--ion-color-tint: var(--ion-color-prueba-tint);
+  
+// -------------------- Basicos indispensables --------------------
+
+
+
+
+
+
+/*------------------------------ TEMA CLARO ------------------------------ */
+@media (prefers-color-scheme: light) {
+    /* Ajustes para tema claro */
 }
+
+// Mixin Tool Bar Light
+
+@mixin toolbar-preset-ligth($background, $color) {
+    --background: #{$background};
+    --color: #{$color};
+    //Ajuste bordes toolbar
+    border-radius: 0 0 12px 12px;
+    font-family: var(--mi-fuente-titulos);
+}
+  
+.preset-toolbar-light {
+    @include toolbar-preset-ligth(var(--colorprimarioligth), #ffffff); // Usando var()
+  }
+
+// Mixin Boton Light
+
+@mixin boton-preset($background, $color) {
+    --background: #{$background};
+    --color: #{$color};
+    font-family: var(--mi-fuente-texto);
+}
+  
+.preset-boton-light {
+    @include boton-preset(var(--colorprimarioligth), #000000); // Usando var()
+  }
+
+
+
+
+  ion-fab-button {
+    --background: var(--colorprimarioligth);
+    --border-radius: 150px;
+    --box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.3), 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+    --color: white;
+  }
+
+/*------------------------------ TEMA OSCURO ------------------------------ */
+.dark {
+    --ion-background-color: #1a1a1a;  // Fondo oscuro
+    --color-primario-actual: var(--colorprimariodark);  // Variable dinámica
+  }
+  
+  /* Tema oscuro del SISTEMA (solo si no hay clase .dark) */
+  @media (prefers-color-scheme: dark) {
+    :root:not(.dark) {
+      --ion-background-color: #121212;
+      --color-primario-actual: var(--colorprimariodark);
+    }
+  }

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AlertController, InfiniteScrollCustomEvent, LoadingController } from '@ionic/angular';
 import { TerremotosService } from '../servicios/terremotos.service';
 
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',

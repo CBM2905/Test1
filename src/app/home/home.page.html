@@ -1,19 +1,49 @@
+<!-- Titulo de la App -->
 <ion-header [translucent]="true">
-  <ion-toolbar color="prueba">
-    <ion-title>
-      App Sismoss
+  <ion-toolbar class="preset-toolbar-light">
+    <ion-title class="ion-text-center">
+      App Sismos
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
+<!-- Inicio Menú  (Implementacion futura)-->
+<ion-menu contentId="main-content">
+  <ion-header>
+    <ion-toolbar class="preset-toolbar-light">
+      <ion-title>Menu Content</ion-title>
     </ion-toolbar>
   </ion-header>
+  <ion-content >This is the menu content.</ion-content>
+</ion-menu>
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding"> Tap the button in the toolbar to open the menu. </ion-content>
+</div>
 
-  <ion-list>
+
+<!-- Inicio contenido ventana -->
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    
+    <!-- Se invoca la clase para Tool Bar Ligth -->
+    <ion-toolbar class="preset-toolbar-light">
+      <ion-title size="large">Blank</ion-title>
+    </ion-toolbar>
+
+  </ion-header>
+
+
+  <!-- Se organizo la lista de visualizacion de terremotos -->
+  <ion-list [inset]="true"  lines="inset">
+    <!-- Inset pule los bordes , lines muestra las divisiones entre registros -->
     @for (terremoto of terremotos; track terremoto; let index = $index){
     <ion-item [button]="true" [routerLink]="[terremoto.geometry.coordinates[0], terremoto.geometry.coordinates[1], terremoto.properties.mag, terremoto.properties.detail]">
         <ion-label>
@@ -25,30 +55,36 @@
         </ion-label>
     </ion-item>
     }
-  </ion-list>
+  </ion-list >
   <ion-infinite-scroll (ionInfinite)="loadMore($event)">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>
-  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-    <ion-fab-button>
+
+
+
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end" >
+    <ion-fab-button >
       <ion-icon name="chevron-up-circle"></ion-icon>
     </ion-fab-button>
-    <ion-fab-list side="top">
-      <ion-fab-button (click)="loadTerromotos()">
-        <ion-icon name="document"></ion-icon>
+    <ion-fab-list side="top" >
+      <ion-fab-button (click)="loadTerromotos()"  >
+        <ion-icon name="add-outline"></ion-icon>
       </ion-fab-button>
       <ion-fab-button>
-        <ion-icon name="color-palette" (click)="searchByFechaIF()"></ion-icon>
+        <ion-icon name="time-outline"></ion-icon>
       </ion-fab-button>
       <ion-fab-button (click)="filtrarPorMagnitud()">
-        <ion-icon name="analytics-outline"></ion-icon>
+        <ion-icon name="calendar-outline"></ion-icon>
       </ion-fab-button>
       <ion-fab-button (click)="filtrarPorCiudad()">
-        <ion-icon name="globe-outline"></ion-icon>
+        <ion-icon name="search-outline"></ion-icon>
+      </ion-fab-button>
+      <!-- (click)="toggleTheme()"-->
+      <ion-fab-button>
+        <ion-icon name="contrast-outline"></ion-icon>
       </ion-fab-button>
     </ion-fab-list>
   </ion-fab>
 
-
-  
 </ion-content>
