@@ -37,7 +37,7 @@ export class TerremotoPage {
       }, 10)
     })
     var marker = L.marker([lon, lat], {icon: greenIcon}).addTo(map) // "Kyiv" is the accessible name of this marker
-      .bindPopup("Aqui fue el lugar del terremoto con una magnitud de:" + mag + "mas info" + details);
+      .bindPopup("Aqui fue el lugar del terremoto, con una magnitud de:" + mag);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
